@@ -1,26 +1,385 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Azizkhaldi-inspired light theme */
+  --background: #E7E7E7;
+  --background-dark: #121212;
+  --foreground: #000000;
+  --foreground-light: #ffffff;
+  --muted: #d4d4d4;
+  --muted-foreground: #525252;
+  --accent: #D4F534;
+  --accent-hover: #e5ff5c;
+  --border: #c4c4c4;
+  --card: #f5f5f5;
+  --card-hover: #ebebeb;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-dark: var(--background-dark);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-foreground-light: var(--foreground-light);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --font-sans: var(--font-cabinet);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Selection with lime */
+::selection {
+  background: var(--accent);
+  color: var(--foreground);
+}
+
+/* Hide scrollbar for cleaner look */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* ===== EDGE GLOW EFFECT (Blue/Purple blur) ===== */
+.edge-glow-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  box-shadow: 
+    inset 0 0 100px 40px rgba(59, 130, 246, 0.15),
+    inset 0 0 200px 80px rgba(139, 92, 246, 0.08);
+}
+
+/* ===== CUSTOM CURSOR ===== */
+.custom-cursor {
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  border: 1.5px solid var(--foreground);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease-out, background 0.2s ease;
+}
+
+.custom-cursor.hover {
+  transform: scale(2.5);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ===== LAYOUT ===== */
+.section {
+  padding: 6rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 8rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 10rem 4rem;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ===== LIME PILL BUTTON ===== */
+.btn-lime {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: var(--foreground);
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-lime:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.btn-lime-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--accent);
+  color: var(--foreground);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.btn-lime-circle:hover {
+  background: var(--accent-hover);
+  transform: scale(1.1);
+}
+
+/* ===== DARK SECTION ===== */
+.section-dark {
+  background: var(--background-dark);
+  color: var(--foreground-light);
+}
+
+.section-dark .text-muted-foreground {
+  color: #a3a3a3;
+}
+
+/* ===== PROJECT CARD HOVER (Lime text overlay) ===== */
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--card);
+  cursor: pointer;
+}
+
+.project-card img {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover img {
+  transform: scale(1.05);
+}
+
+.project-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-card-overlay {
+  opacity: 1;
+}
+
+.project-card-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-card-title {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ===== SOCIAL ICONS (Left side) ===== */
+.social-sidebar {
+  position: fixed;
+  left: 2rem;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  z-index: 100;
+}
+
+.social-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--foreground);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* ===== LENIS SMOOTH SCROLL ===== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ===== LINK UNDERLINE ===== */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--foreground);
+  transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* ===== MAGNETIC BUTTON ===== */
+.magnetic-btn {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===== TEXT ANIMATIONS ===== */
+.reveal-text {
+  overflow: hidden;
+}
+
+.reveal-text > * {
+  transform: translateY(100%);
+  animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes reveal-up {
+  to { transform: translateY(0); }
+}
+
+.split-char {
+  display: inline-block;
+  transform-origin: center bottom;
+}
+
+/* ===== SMOOTH IMAGE LOAD ===== */
+img {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+img[src] {
+  opacity: 1;
+}
+
+/* ===== VERTICAL LINE (Experience section) ===== */
+.experience-line {
+  width: 2px;
+  background: var(--accent);
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+/* ===== SCROLL INDICATOR ===== */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ===== RIGHT SIDEBAR (W. / Hucksters) ===== */
+.right-sidebar {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ===== BOTTOM RIGHT CIRCLE BUTTON ===== */
+.corner-circle-btn {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  width: 3rem;
+  height: 3rem;
+  background: var(--background-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--foreground-light);
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.corner-circle-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ===== PAGE TRANSITIONS ===== */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
