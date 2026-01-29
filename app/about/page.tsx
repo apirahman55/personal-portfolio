@@ -4,74 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-
-const experience = [
-  {
-    period: "Jan 2023 – Present",
-    title: "Freelance Software Engineer",
-    company: "Self-employed",
-    description: "Building full-stack and AI-integrated applications for government (SPBE) and private clients. Projects include Tata Kelola SPBE, Manperub SPBE, Manrisk SPBE, Pemilu Anomaly Analytics, Styx Content Moderation, and AI Legal Review.",
-    tech: ["React.js", "Next.js", "Go", "Python", "NestJS"],
-    current: true,
-  },
-  {
-    period: "Aug 2023 – Present",
-    title: "Technical Lead",
-    company: "SABAKO",
-    description: "Collaborating on end-to-end product development for Klabbe, Matra Bangunan, and Writespace. Creating PRDs, defining business flows, handling architecture decisions, and managing sprint planning using Agile/Scrum.",
-    tech: ["Next.js", "NestJS", "PostgreSQL"],
-    current: true,
-  },
-  {
-    period: "May 2025 – Present",
-    title: "Frontend Developer",
-    company: "Rolling Glory (Part-time)",
-    description: "Continuing collaboration on frontend projects after transitioning from a full-time role.",
-    tech: ["Vue.js", "React.js", "Next.js"],
-    current: true,
-  },
-  {
-    period: "Jul 2022 – Jun 2025",
-    title: "Frontend Developer",
-    company: "Rolling Glory (Full-time)",
-    description: "Developed KAI Telemediska healthcare platform using Vue.js/Vuex. Built Treasury website and H5 mobile integration. Optimized the Moduit investment platform. Implemented testing with Jest and Cypress.",
-    tech: ["Vue.js", "Next.js", "React.js", "Jest", "Cypress"],
-    current: false,
-  },
-  {
-    period: "Jan 2021 – Jul 2022",
-    title: "Frontend Developer",
-    company: "PT. Qoin Digital Indonesia",
-    description: "Built internal fintech tools including Back Office, Merchant Portal, and WebView apps. Created a reusable component library from design mock-ups.",
-    tech: ["React.js", "TypeScript"],
-    current: false,
-  },
-  {
-    period: "Mar 2020 – Nov 2020",
-    title: "Frontend Developer",
-    company: "Talent Indonesia (Freelance)",
-    description: "Developed Tokutei labor distribution platform using Laravel. Built Klikcoaching and Competent e-learning platforms using Quasar Vue.js.",
-    tech: ["Vue.js", "Laravel", "Quasar"],
-    current: false,
-  },
-  {
-    period: "Sep 2019 – Feb 2020",
-    title: "Frontend Developer",
-    company: "Ruang Inovasi Indonesia",
-    description: "Built four mobile apps using React Native and Android Studio: Apps Daily, Invest Cycle, Kaki Lima, and Kumpulmodal.",
-    tech: ["React Native", "Android Studio"],
-    current: false,
-  },
-];
-
-const techStack = {
-  Frontend: ["Next.js", "React.js", "Vue.js", "TypeScript", "Tailwind CSS", "GSAP", "Framer Motion"],
-  Mobile: ["React Native", "Flutter", "Android Studio"],
-  Backend: ["Go", "Node.js", "NestJS", "Python", "Laravel"],
-  Database: ["PostgreSQL", "MySQL", "MongoDB", "Firebase"],
-  DevOps: ["Docker", "Kubernetes", "CI/CD", "DigitalOcean"],
-  Tools: ["Jest", "Cypress", "GraphQL", "Git"],
-};
+import { experience, techStack, personalInfo } from "@/lib/data";
 
 export default function AboutPage() {
   const containerRef = useRef<HTMLDivElement>(null);

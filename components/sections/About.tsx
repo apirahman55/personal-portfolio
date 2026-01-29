@@ -2,33 +2,9 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-
-// Work experience data
-const experiences = [
-  {
-    title: "Freelance Software Engineer",
-    company: "Self-employed",
-    description: "Building full-stack and AI-integrated applications for government (SPBE) and private clients including Pemilu Analytics, Styx Content Moderation, and AI Legal Review.",
-    period: "Jan 2023 – Present",
-    current: true,
-  },
-  {
-    title: "Frontend Developer",
-    company: "Rolling Glory",
-    description: "Developed KAI Telemediska healthcare platform, Treasury systems, and Moduit investment platform using Vue.js, React.js, and Next.js.",
-    period: "Jul 2022 – Jun 2025",
-    current: false,
-  },
-  {
-    title: "Frontend Developer",
-    company: "PT. Qoin Digital Indonesia",
-    description: "Built internal fintech tools including Back Office, Merchant Portal, and WebView apps. Created a reusable component library.",
-    period: "Jan 2021 – Jul 2022",
-    current: false,
-  },
-];
+import { experiencePreview } from "@/lib/data";
+import { LimeButton } from "@/components/ui/LimeButton";
 
 export function AboutPreview() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -73,7 +49,7 @@ export function AboutPreview() {
 
           {/* Experience items */}
           <div className="space-y-16 lg:space-y-24">
-            {experiences.map((exp, index) => {
+            {experiencePreview.map((exp, index) => {
               const isLeft = index % 2 === 0;
               
               return (
@@ -135,12 +111,7 @@ export function AboutPreview() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex justify-center mt-20"
         >
-          <Link href="/about" className="inline-flex items-center gap-2">
-            <span className="btn-lime">about me</span>
-            <span className="btn-lime-circle">
-              <ArrowUpRight size={16} />
-            </span>
-          </Link>
+          <LimeButton href="/about">about me</LimeButton>
         </motion.div>
       </div>
     </section>

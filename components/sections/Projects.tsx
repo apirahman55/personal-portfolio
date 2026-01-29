@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight, Plus } from "lucide-react";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/lib/projects";
+import { LimeButtonSimple } from "@/components/ui/LimeButton";
 import { useCursor } from "@/components/ContextCursor";
 
 function ProjectListItem({
@@ -164,10 +165,9 @@ export function FeaturedProjects() {
             transition={{ duration: 0.6 }}
             className="mt-16 text-center"
           >
-            <Link href="/works" className="btn-lime inline-flex items-center gap-2">
+            <LimeButtonSimple href="/works" icon={<ArrowUpRight size={16} />}>
               View All Projects
-              <ArrowUpRight size={16} />
-            </Link>
+            </LimeButtonSimple>
           </motion.div>
         )}
       </div>

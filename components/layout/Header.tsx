@@ -95,7 +95,7 @@ export function Header() {
               className="text-xl font-medium tracking-tight hover:opacity-70 transition-all duration-300"
               style={{ color: textColorFull }}
             >
-              a.pi<span className="text-accent">.</span>
+              Api AR<span className="text-accent">.</span>
             </Link>
           </div>
 

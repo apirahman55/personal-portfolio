@@ -1,9 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Mail, Linkedin, Github } from "lucide-react";
+import { Mail } from "lucide-react";
 import Link from "next/link";
+import { personalInfo, socialLinks } from "@/lib/data";
+import { LimeButton } from "@/components/ui/LimeButton";
+import { LinkedInIcon, GitHubIcon } from "@/lib/icons";
+
+// Helper to get social link by platform
+const getLink = (platform: string) => socialLinks.find(l => l.platform === platform)?.href || "#";
 
 export function Contact() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,18 +63,9 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-wrap items-center justify-center gap-4 pt-4"
           >
-            <Link
-              href="mailto:apirahman55@gmail.com"
-              className="inline-flex items-center gap-2"
-            >
-              <span className="btn-lime">
-                <Mail size={16} />
-                Send Email
-              </span>
-              <span className="btn-lime-circle">
-                <ArrowUpRight size={16} />
-              </span>
-            </Link>
+            <LimeButton href={`mailto:${personalInfo.email}`} icon={<Mail size={16} />}>
+              Send Email
+            </LimeButton>
           </motion.div>
 
           {/* Social links */}
@@ -80,19 +77,19 @@ export function Contact() {
             className="flex items-center justify-center gap-6 pt-8"
           >
             <Link
-              href="https://linkedin.com/in/api-al-rahman"
+              href={getLink("linkedin")}
               target="_blank"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Linkedin size={20} />
+              <LinkedInIcon className="w-5 h-5" />
               <span className="text-sm">LinkedIn</span>
             </Link>
             <Link
-              href="https://github.com/apialrahman"
+              href={getLink("github")}
               target="_blank"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Github size={20} />
+              <GitHubIcon className="w-5 h-5" />
               <span className="text-sm">GitHub</span>
             </Link>
           </motion.div>
@@ -105,10 +102,12 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="text-sm text-muted-foreground"
           >
-            apirahman55@gmail.com
+            {personalInfo.email}
           </motion.p>
         </div>
       </motion.div>
     </section>
   );
 }
+
+

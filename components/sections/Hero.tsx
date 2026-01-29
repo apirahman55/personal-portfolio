@@ -7,6 +7,8 @@ import { gsap } from "gsap";
 import dynamic from "next/dynamic";
 import { Magnetic } from "@/hooks/useMagnetic";
 import Link from "next/link";
+import { personalInfo } from "@/lib/data";
+import { LimeButtonSimple } from "@/components/ui/LimeButton";
 
 // Dynamic import for 3D to avoid SSR issues
 const Hero3D = dynamic(
@@ -76,7 +78,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-muted-foreground text-base mb-6"
           >
-            Hi! I&apos;m Api
+            Hi! I&apos;m {personalInfo.firstName}
           </motion.p>
 
           {/* Large Title - Aziz style */}
@@ -85,8 +87,9 @@ export function Hero() {
               ref={titleRef}
               className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.9]"
             >
-              <span className="title-line block">Senior Full-stack Developer</span>
-              <span className="title-line block">Front-End Specialist.</span>
+              {personalInfo.titleLines.map((line, index) => (
+                <span key={index} className="title-line block">{line}</span>
+              ))}
             </h1>
           </div>
 
@@ -97,15 +100,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mb-12"
           >
-            <Magnetic strength={0.3}>
-              <Link
-                href="/works"
-                className="btn-lime inline-flex items-center gap-2"
-              >
-                View Projects
-                <ArrowUpRight size={16} />
-              </Link>
-            </Magnetic>
+
             <Magnetic strength={0.3}>
               <Link
                 href="#contact"
