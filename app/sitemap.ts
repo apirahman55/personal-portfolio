@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { projects } from "@/lib/projects";
 
-const BASE_URL = "https://apialrahman.com";
+const BASE_URL = "https://apuh.my.id";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages

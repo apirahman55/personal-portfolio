@@ -18,7 +18,7 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-const BASE_URL = "https://apialrahman.com";
+const BASE_URL = "https://apuh.my.id";
 
 export const viewport: Viewport = {
   width: "device-width",

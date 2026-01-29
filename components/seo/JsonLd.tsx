@@ -1,6 +1,6 @@
 import { personalInfo, socialLinks, techStack, experience } from "@/lib/data";
 
-const BASE_URL = "https://apialrahman.com";
+const BASE_URL = "https://apuh.my.id";
 
 // Helper to get social link by platform
 const getLink = (platform: string) => socialLinks.find(l => l.platform === platform)?.href || "";
