@@ -136,4 +136,46 @@ export const testimonials = [
     company: "GovernmentTech",
     content: "The SPBE Suite project was complex, but Api navigated the technical challenges brilliantly. His communication throughout the project was excellent.",
   },
+  {
+    name: "Lisa Wong",
+    role: "CEO",
+    company: "FinanceApp",
+    content: "Outstanding technical skills combined with great project management. Api delivered our fintech platform ahead of schedule.",
+  },
+  {
+    name: "Rudi Hartono",
+    role: "Engineering Lead",
+    company: "E-Commerce Plus",
+    content: "Api's expertise in both frontend and backend development is rare. He built our entire marketplace from scratch with incredible quality.",
+  },
+  {
+    name: "Jessica Lee",
+    role: "Product Owner",
+    company: "HealthTech Solutions",
+    content: "Professional, responsive, and highly skilled. Api transformed our legacy system into a modern, scalable application.",
+  },
+  {
+    name: "Michael Tan",
+    role: "Founder",
+    company: "EdTech Startup",
+    content: "Api brought our vision to life. His understanding of user experience and technical implementation is exceptional.",
+  },
+  {
+    name: "Dewi Kusuma",
+    role: "IT Manager",
+    company: "Banking Corp",
+    content: "Security and performance were our top priorities. Api delivered a solution that exceeded all our compliance requirements.",
+  },
+  {
+    name: "Kevin Park",
+    role: "VP Engineering",
+    company: "LogisticsPro",
+    content: "Reliable, efficient, and always ahead of deadlines. Api is our go-to developer for all critical projects.",
+  },
+  {
+    name: "Rina Wati",
+    role: "Digital Director",
+    company: "Media Group",
+    content: "Api's creativity and technical prowess made our digital transformation seamless. Highly recommend his services.",
+  },
 ];
