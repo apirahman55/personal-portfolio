@@ -60,8 +60,8 @@ export function Hero() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* 3D Iridescent Blob */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      {/* 3D Iridescent Blob - hidden on mobile for performance */}
+      <div className="absolute inset-0 hidden md:flex items-center justify-center">
         <Hero3D />
       </div>
 
