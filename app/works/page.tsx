@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/lib/projects";
@@ -14,12 +15,24 @@ function ProjectListItem({
   index: number;
 }) {
   const { setProjectPreview, clearProjectPreview } = useCursor();
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.4, 1, 1, 0.4]);
 
   return (
     <motion.div
+      ref={ref}
+      style={{ y, opacity }}
       initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
     >
       <Link
         href={`/works/${project.slug}`}
@@ -31,18 +44,33 @@ function ProjectListItem({
           {/* Project Info */}
           <div className="flex items-center gap-6 md:gap-12">
             {/* Number */}
-            <span className="text-muted-foreground text-sm font-mono w-8">
+            <motion.span 
+              className="text-muted-foreground text-sm font-mono w-8"
+              style={{ 
+                x: useTransform(scrollYProgress, [0, 1], [-20, 20]) 
+              }}
+            >
               {String(index + 1).padStart(2, "0")}
-            </span>
+            </motion.span>
 
             {/* Title */}
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight group-hover:text-accent transition-colors duration-300">
+            <motion.h2 
+              className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight group-hover:text-accent transition-colors duration-300"
+              style={{ 
+                x: useTransform(scrollYProgress, [0, 1], [-30, 30]) 
+              }}
+            >
               {project.title}
-            </h2>
+            </motion.h2>
           </div>
 
           {/* Right side - category + arrow */}
-          <div className="flex items-center gap-8 md:gap-12 ml-14 md:ml-0">
+          <motion.div 
+            className="flex items-center gap-8 md:gap-12 ml-14 md:ml-0"
+            style={{ 
+              x: useTransform(scrollYProgress, [0, 1], [30, -30]) 
+            }}
+          >
             {/* Tags */}
             <div className="hidden md:flex items-center gap-3">
               {project.tags.slice(0, 2).map((tag) => (
@@ -70,7 +98,7 @@ function ProjectListItem({
                 className="text-muted-foreground group-hover:text-background transition-colors"
               />
             </motion.div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Description - shows on mobile */}
@@ -84,8 +112,8 @@ function ProjectListItem({
 
 export default function WorksPage() {
   return (
-    <div className="min-h-screen pt-32 pb-24">
-      <div className="container">
+    <div className="pt-32 pb-24 bg-background relative z-10">
+      <div className="container px-6 lg:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -99,10 +127,10 @@ export default function WorksPage() {
             transition={{ delay: 0.2 }}
             className="text-accent text-sm font-medium uppercase tracking-[0.2em] block mb-4"
           >
-            Selected Works
+            Portfolio
           </motion.span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
-            Projects
+            Selected Works
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl max-w-2xl">
             A curated selection of projects showcasing my expertise in building
@@ -123,20 +151,28 @@ export default function WorksPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-24 text-center"
+          className="mt-24 text-center space-y-6"
         >
-          <p className="text-muted-foreground text-lg mb-6">
-            Interested in working together?
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold">
+            Let&apos;s Talk
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+            Have a project in mind or want to collaborate? I&apos;m always open to discussing new opportunities.
           </p>
-          <Link
-            href="/#contact"
-            className="inline-flex items-center gap-2 text-accent text-lg font-medium hover:underline"
-          >
-            Let&apos;s talk
-            <ArrowUpRight size={18} />
-          </Link>
+          <div className="pt-4">
+            <Link
+              href="/#contact"
+              className="inline-flex items-center gap-2"
+            >
+              <span className="btn-lime">Get in Touch</span>
+              <span className="btn-lime-circle">
+                <ArrowUpRight size={16} />
+              </span>
+            </Link>
+          </div>
         </motion.div>
       </div>
     </div>
   );
 }
+

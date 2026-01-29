@@ -156,18 +156,27 @@ export default async function ProjectPage({ params }: PageProps) {
       )}
 
       {/* Next Project CTA */}
-      <section className="section bg-card">
-        <div className="container text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-6">
-            Interested in working together?
+      <section className="section bg-background">
+        <div className="container text-center space-y-6">
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold">
+            Let&apos;s Talk
           </h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button href="#contact" variant="primary" icon>
-              Get in Touch
-            </Button>
-            <Button href="/works" variant="outline" icon>
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+            Have a project in mind or want to collaborate? I&apos;m always open to discussing new opportunities.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 pt-4">
+            <Link href="/#contact" className="inline-flex items-center gap-2">
+              <span className="btn-lime">Get in Touch</span>
+              <span className="btn-lime-circle">
+                <ArrowUpRight size={16} />
+              </span>
+            </Link>
+            <Link
+              href="/works"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-border text-foreground rounded-full hover:bg-foreground hover:text-background transition-all"
+            >
               View More Projects
-            </Button>
+            </Link>
           </div>
         </div>
       </section>

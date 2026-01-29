@@ -46,8 +46,6 @@ export default function RootLayout({
               <SmoothScroll>
                 <ContextAwareCursor />
                 <SocialSidebar />
-                {/* Blue/purple edge glow effect */}
-                <div className="edge-glow-wrapper" />
                 <Header />
                 <main className="min-h-screen">
                   {children}
