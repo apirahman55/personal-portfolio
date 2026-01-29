@@ -2,6 +2,25 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
+  "description": "Personal portfolio website built with Next.js, Framer Motion, GSAP, and Three.js",
+  "author": {
+    "name": "Api Al Rahman",
+    "email": "apirahman55@gmail.com",
+    "url": "https://apuh.my.id"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apirahman55/personal-portfolio"
+  },
+  "keywords": [
+    "portfolio",
+    "nextjs",
+    "react",
+    "framer-motion",
+    "gsap",
+    "three.js",
+    "tailwindcss"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

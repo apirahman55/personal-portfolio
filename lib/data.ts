@@ -44,7 +44,7 @@ export const socialLinks: SocialLink[] = [
     platform: "linkedin",
   },
   {
-    href: "https://github.com/apialrahman",
+    href: "https://github.com/apirahman55",
     label: "GitHub",
     platform: "github",
   },
