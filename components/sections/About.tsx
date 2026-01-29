@@ -111,7 +111,7 @@ export function AboutPreview() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex justify-center mt-20"
         >
-          <LimeButton href="/about">about me</LimeButton>
+          <LimeButton href="/about">See More</LimeButton>
         </motion.div>
       </div>
     </section>

@@ -121,7 +121,7 @@ export const experience: Experience[] = [
 ];
 
 // Short version for landing page (top 3)
-export const experiencePreview = experience.slice(0, 3);
+export const experiencePreview = experience.slice(0, 4);
 
 // ============ TECH STACK ============
 export const techStack: TechStack = {
