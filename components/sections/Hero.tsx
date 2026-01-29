@@ -83,10 +83,10 @@ export function Hero() {
           <div className="overflow-hidden mb-8">
             <h1
               ref={titleRef}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight leading-[0.9]"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.9]"
             >
-              <span className="title-line block">Full-stack Developer</span>
-              <span className="title-line block">UI & UX Designer.</span>
+              <span className="title-line block">Senior Full-stack Developer</span>
+              <span className="title-line block">Front-End Specialist.</span>
             </h1>
           </div>
 
@@ -95,7 +95,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex flex-wrap items-center justify-center gap-4 mb-12"
+            className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mb-12"
           >
             <Magnetic strength={0.3}>
               <Link
