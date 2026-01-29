@@ -58,7 +58,7 @@ export function Contact() {
             className="flex flex-wrap items-center justify-center gap-4 pt-4"
           >
             <Link
-              href="mailto:api.alrahman@gmail.com"
+              href="mailto:apirahman55@gmail.com"
               className="inline-flex items-center gap-2"
             >
               <span className="btn-lime">
@@ -88,7 +88,7 @@ export function Contact() {
               <span className="text-sm">LinkedIn</span>
             </Link>
             <Link
-              href="https://github.com"
+              href="https://github.com/apialrahman"
               target="_blank"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
@@ -105,7 +105,7 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="text-sm text-muted-foreground"
           >
-            api.alrahman@gmail.com
+            apirahman55@gmail.com
           </motion.p>
         </div>
       </motion.div>

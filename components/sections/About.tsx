@@ -8,24 +8,24 @@ import Link from "next/link";
 // Work experience data
 const experiences = [
   {
-    title: "Full Stack Engineer (Part-time)",
-    company: "AI Startup",
-    description: "Developing an AI-powered SaaS platform with real-time collaboration, billing systems, and intelligent document management.",
-    period: "Jun 2025 – Present",
+    title: "Freelance Software Engineer",
+    company: "Self-employed",
+    description: "Building full-stack and AI-integrated applications for government (SPBE) and private clients including Pemilu Analytics, Styx Content Moderation, and AI Legal Review.",
+    period: "Jan 2023 – Present",
     current: true,
   },
   {
-    title: "Senior Software Engineer",
-    company: "Healthcare Platform",
-    description: "Building HIPAA-compliant healthcare management systems with React, Next.js, and Go backend services.",
-    period: "2022 – 2025",
+    title: "Frontend Developer",
+    company: "Rolling Glory",
+    description: "Developed KAI Telemediska healthcare platform, Treasury systems, and Moduit investment platform using Vue.js, React.js, and Next.js.",
+    period: "Jul 2022 – Jun 2025",
     current: false,
   },
   {
-    title: "Software Engineer",
-    company: "Government Agency",
-    description: "Developed secure, high-performance platforms for government services using TypeScript and cloud infrastructure.",
-    period: "2020 – 2022",
+    title: "Frontend Developer",
+    company: "PT. Qoin Digital Indonesia",
+    description: "Built internal fintech tools including Back Office, Merchant Portal, and WebView apps. Created a reusable component library.",
+    period: "Jan 2021 – Jul 2022",
     current: false,
   },
 ];

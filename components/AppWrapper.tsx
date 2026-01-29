@@ -12,14 +12,14 @@ export function AppWrapper({ children }: AppWrapperProps) {
   const [showSplash, setShowSplash] = useState(true);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
 
-  useEffect(() => {
-    // Check if user has visited before in this session
-    const hasVisited = sessionStorage.getItem("hasVisited");
-    if (hasVisited) {
-      setShowSplash(false);
-      setIsFirstVisit(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Check if user has visited before in this session
+  //   const hasVisited = sessionStorage.getItem("hasVisited");
+  //   if (hasVisited) {
+  //     setShowSplash(false);
+  //     setIsFirstVisit(false);
+  //   }
+  // }, []);
 
   const handleSplashComplete = () => {
     setShowSplash(false);

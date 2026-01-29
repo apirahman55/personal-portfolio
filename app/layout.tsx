@@ -18,13 +18,13 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Api Al Rahman | Software Engineer",
-  description: "Full-stack Developer & UI/UX Designer. Building digital experiences that feel expensive, load instantly, and turn visitors into loyal clients.",
-  keywords: ["Software Engineer", "React", "Next.js", "Go", "TypeScript", "Frontend Developer", "Full Stack Developer", "UI/UX Designer"],
+  title: "Api Al Rahman | Frontend Specialist & Full-Stack Developer",
+  description: "Software Engineer with 5+ years of experience specializing in Frontend development with strong Full-Stack capabilities. Expertise in React.js, Next.js, Vue.js, and Go.",
+  keywords: ["Software Engineer", "Frontend Specialist", "React", "Next.js", "Vue.js", "Go", "TypeScript", "Full Stack Developer"],
   authors: [{ name: "Api Al Rahman" }],
   openGraph: {
-    title: "Api Al Rahman | Software Engineer",
-    description: "Full-stack Developer & UI/UX Designer specializing in React, Next.js, and Go.",
+    title: "Api Al Rahman | Frontend Specialist & Full-Stack Developer",
+    description: "Software Engineer specializing in React.js, Next.js, Vue.js, and Go. Building healthcare, government, and fintech platforms.",
     type: "website",
   },
 };

@@ -14,7 +14,7 @@ const socialLinks = [
     ),
   },
   {
-    href: "https://github.com/api-al-rahman",
+    href: "https://github.com/apialrahman",
     label: "GitHub",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -23,7 +23,7 @@ const socialLinks = [
     ),
   },
   {
-    href: "https://wa.me/1234567890",
+    href: "https://wa.me/6289537991134",
     label: "WhatsApp",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
