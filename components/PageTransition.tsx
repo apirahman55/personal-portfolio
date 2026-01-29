@@ -8,6 +8,7 @@ interface PageTransitionProps {
   children: ReactNode;
 }
 
+// Maria Vareva-style smooth, elegant transition
 export function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
 
@@ -15,15 +16,25 @@ export function PageTransition({ children }: PageTransitionProps) {
     <AnimatePresence mode="wait">
       <motion.div
         key={pathname}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         transition={{
-          duration: 0.4,
-          ease: [0.16, 1, 0.3, 1],
+          duration: 0.6,
+          ease: [0.22, 1, 0.36, 1], // Premium ease-out
         }}
       >
-        {children}
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{
+            duration: 0.8,
+            ease: [0.22, 1, 0.36, 1],
+            delay: 0.1,
+          }}
+        >
+          {children}
+        </motion.div>
       </motion.div>
     </AnimatePresence>
   );
@@ -36,34 +47,52 @@ export function PageTransitionOverlay({ children }: PageTransitionProps) {
   return (
     <AnimatePresence mode="wait">
       <motion.div key={pathname}>
-        {/* Overlay that slides up */}
+        {/* Elegant slide overlay */}
         <motion.div
-          className="fixed inset-0 z-[9999] bg-accent pointer-events-none"
+          className="fixed inset-0 z-[9999] bg-foreground pointer-events-none"
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 0 }}
           exit={{ scaleY: 1 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           style={{ transformOrigin: "bottom" }}
         />
         <motion.div
-          className="fixed inset-0 z-[9999] bg-accent pointer-events-none"
+          className="fixed inset-0 z-[9999] bg-foreground pointer-events-none"
           initial={{ scaleY: 1 }}
           animate={{ scaleY: 0 }}
           exit={{ scaleY: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
           style={{ transformOrigin: "top" }}
         />
 
-        {/* Content */}
+        {/* Content with stagger */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, delay: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           {children}
         </motion.div>
       </motion.div>
     </AnimatePresence>
+  );
+}
+
+// Content fade for sections
+export function ContentReveal({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+        delay,
+      }}
+    >
+      {children}
+    </motion.div>
   );
 }

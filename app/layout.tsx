@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { CursorProvider, ContextAwareCursor } from "@/components/ContextCursor";
 import { SocialSidebar } from "@/components/SocialSidebar";
+import { AppWrapper } from "@/components/AppWrapper";
 
 // Space Grotesk - similar to Cabinet Grotesk used by azizkhaldi.com
 const spaceGrotesk = Space_Grotesk({
@@ -39,17 +40,19 @@ export default function RootLayout({
         style={{ fontFamily: "var(--font-cabinet), system-ui, sans-serif" }}
       >
         <CursorProvider>
-          <SmoothScroll>
-            <ContextAwareCursor />
-            <SocialSidebar />
-            {/* Blue/purple edge glow effect */}
-            <div className="edge-glow-wrapper" />
-            <Header />
-            <main className="min-h-screen">
-              {children}
-            </main>
-            <Footer />
-          </SmoothScroll>
+          <AppWrapper>
+            <SmoothScroll>
+              <ContextAwareCursor />
+              <SocialSidebar />
+              {/* Blue/purple edge glow effect */}
+              <div className="edge-glow-wrapper" />
+              <Header />
+              <main className="min-h-screen">
+                {children}
+              </main>
+              <Footer />
+            </SmoothScroll>
+          </AppWrapper>
         </CursorProvider>
       </body>
     </html>
