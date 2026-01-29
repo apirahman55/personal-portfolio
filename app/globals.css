@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  /* Azizkhaldi-inspired light theme */
+  /* Light theme with Electric Blue accent */
   --background: #E7E7E7;
   --background-dark: #121212;
   --foreground: #000000;
   --foreground-light: #ffffff;
   --muted: #d4d4d4;
   --muted-foreground: #525252;
-  --accent: #D4F534;
-  --accent-hover: #e5ff5c;
+  --accent: #3B82F6;
+  --accent-hover: #2563EB;
   --border: #c4c4c4;
   --card: #f5f5f5;
   --card-hover: #ebebeb;
@@ -69,21 +69,24 @@ body {
 
 /* ===== CUSTOM CURSOR ===== */
 .custom-cursor {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   background: transparent;
   border: 1.5px solid var(--foreground);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 9999;
-  transition: transform 0.15s ease-out, background 0.2s ease;
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, border-color 0.2s ease, margin 0.2s ease;
 }
 
 .custom-cursor.hover {
-  transform: scale(2.5);
-  background: var(--accent);
+  width: 40px;
+  height: 40px;
+  background: rgba(59, 130, 246, 0.15);
   border-color: var(--accent);
+  margin-left: -14px;
+  margin-top: -14px;
 }
 
 /* ===== LAYOUT ===== */
@@ -116,9 +119,9 @@ body {
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   background: var(--accent);
-  color: var(--foreground);
+  color: #ffffff !important; /* White text on blue */
   border-radius: 9999px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.875rem;
   transition: all 0.3s ease;
   border: none;
@@ -128,6 +131,7 @@ body {
 .btn-lime:hover {
   background: var(--accent-hover);
   transform: translateY(-2px);
+  color: #000000 !important;
 }
 
 .btn-lime-circle {
@@ -137,7 +141,7 @@ body {
   width: 2.5rem;
   height: 2.5rem;
   background: var(--accent);
-  color: var(--foreground);
+  color: #ffffff !important; /* White on blue */
   border-radius: 50%;
   transition: all 0.3s ease;
 }
@@ -145,6 +149,7 @@ body {
 .btn-lime-circle:hover {
   background: var(--accent-hover);
   transform: scale(1.1);
+  color: #000000 !important;
 }
 
 /* ===== DARK SECTION ===== */
@@ -213,18 +218,20 @@ body {
   flex-direction: column;
   gap: 1.25rem;
   z-index: 100;
+  transition: color 0.3s ease;
 }
 
 .social-icon {
   width: 1.25rem;
   height: 1.25rem;
-  color: var(--foreground);
+  color: inherit !important;
   opacity: 0.6;
   transition: all 0.3s ease;
 }
 
 .social-icon:hover {
   opacity: 1;
+  color: var(--accent) !important;
   transform: translateY(-2px);
 }
 

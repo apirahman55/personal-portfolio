@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { CursorProvider, ContextAwareCursor } from "@/components/ContextCursor";
+import { SocialSidebar } from "@/components/SocialSidebar";
 
 // Space Grotesk - similar to Cabinet Grotesk used by azizkhaldi.com
 const spaceGrotesk = Space_Grotesk({
@@ -40,6 +41,7 @@ export default function RootLayout({
         <CursorProvider>
           <SmoothScroll>
             <ContextAwareCursor />
+            <SocialSidebar />
             {/* Blue/purple edge glow effect */}
             <div className="edge-glow-wrapper" />
             <Header />

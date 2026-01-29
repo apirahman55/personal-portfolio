@@ -1,109 +1,200 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
-import { Magnetic } from "@/hooks/useMagnetic";
+import { Plus, ArrowUpRight } from "lucide-react";
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/works", label: "Works" },
+  { href: "/about", label: "About", numeral: "I" },
+  { href: "/works", label: "Works", numeral: "II" },
+  { href: "#contact", label: "Contact", numeral: "III" },
 ];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOverDark, setIsOverDark] = useState(false);
+
+  // Detect when header is over dark sections
+  useEffect(() => {
+    const checkBackground = () => {
+      const header = document.querySelector('header');
+      if (!header) return;
+      
+      const headerRect = header.getBoundingClientRect();
+      const headerCenter = headerRect.top + headerRect.height / 2;
+      
+      // Get all dark sections
+      const darkSections = document.querySelectorAll('.section-dark, .bg-background-dark, [data-dark]');
+      
+      let overDark = false;
+      darkSections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (headerCenter >= rect.top && headerCenter <= rect.bottom) {
+          overDark = true;
+        }
+      });
+      
+      setIsOverDark(overDark);
+    };
+
+    // Check on scroll
+    window.addEventListener('scroll', checkBackground, { passive: true });
+    // Check initially
+    checkBackground();
+    
+    return () => window.removeEventListener('scroll', checkBackground);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 md:px-12 md:py-6">
-      <nav className="flex items-center justify-between max-w-7xl mx-auto">
-        {/* Logo - Simple A with underline on hover */}
-        <Link 
-          href="/" 
-          className="text-2xl font-bold tracking-tight hover:opacity-70 transition-opacity"
-        >
-          A<span className="text-accent">|</span>
-        </Link>
+    <>
+      <header className={`fixed top-0 left-0 right-0 z-50 px-6 py-5 md:px-12 md:py-6 transition-colors duration-300 ${isOverDark ? 'nav-inverted' : ''}`}>
+        <nav className="flex items-center justify-between max-w-7xl mx-auto">
+          {/* LEFT - Nav Links (Desktop) */}
+          <ul className="hidden md:flex items-center gap-10">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`group relative text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-300 ${
+                    isOverDark 
+                      ? 'text-foreground-light/60 hover:text-foreground-light' 
+                      : 'text-foreground/60 hover:text-foreground'
+                  }`}
+                >
+                  {link.label}
+                  <span className={`absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300 ${
+                    isOverDark ? 'bg-foreground-light' : 'bg-foreground'
+                  }`} />
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        {/* Desktop Navigation - Simple text links */}
-        <ul className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors link-underline"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* CTA Button Group - Lime pill + circle arrow (Aziz style) */}
-        <Magnetic strength={0.2}>
-          <div className="hidden md:flex items-center gap-2">
-            <Link
-              href="#contact"
-              className="btn-lime text-sm"
+          {/* CENTER - Logo (absolutely centered) */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <Link 
+              href="/" 
+              className={`text-xl font-medium tracking-tight hover:opacity-70 transition-all duration-300 ${
+                isOverDark ? 'text-foreground-light' : 'text-foreground'
+              }`}
             >
-              Contact
-            </Link>
-            <Link
-              href="#contact"
-              className="btn-lime-circle"
-            >
-              <ArrowUpRight size={16} />
+              a.pi<span className="text-accent">.</span>
             </Link>
           </div>
-        </Magnetic>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 text-foreground"
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
+          {/* RIGHT - Contact Us (Desktop) */}
+          <Link
+            href="#contact"
+            className={`hidden md:inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-300 group ${
+              isOverDark 
+                ? 'text-foreground-light/60 hover:text-foreground-light' 
+                : 'text-foreground/60 hover:text-foreground'
+            }`}
+          >
+            Contact Us
+            <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
 
-      {/* Mobile Menu */}
+          {/* Mobile Menu Button - Burger */}
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="md:hidden flex flex-col gap-1.5 p-2"
+            aria-label="Open menu"
+          >
+            <span className={`w-6 h-px transition-colors duration-300 ${isOverDark ? 'bg-foreground-light' : 'bg-foreground'}`} />
+            <span className={`w-6 h-px transition-colors duration-300 ${isOverDark ? 'bg-foreground-light' : 'bg-foreground'}`} />
+          </button>
+        </nav>
+      </header>
+
+      {/* Mobile Full-Screen Modal Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 right-0 bg-background border-b border-border/20 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[100] bg-background-dark md:hidden"
           >
-            <ul className="flex flex-col p-6 gap-4">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-lg font-medium text-foreground hover:text-accent transition-colors"
+            {/* Close button - Plus/X */}
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute top-5 right-6 p-2 text-foreground-light z-10"
+              aria-label="Close menu"
+            >
+              <motion.div
+                initial={{ rotate: -45 }}
+                animate={{ rotate: 0 }}
+                exit={{ rotate: 45 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Plus size={32} className="rotate-45" />
+              </motion.div>
+            </button>
+
+            {/* Logo in modal */}
+            <div className="absolute top-5 left-6 text-xl font-medium tracking-tight text-foreground-light">
+              a.pi<span className="text-accent">.</span>
+            </div>
+
+            {/* Menu Links */}
+            <div className="flex flex-col justify-center h-full px-6 pb-20">
+              <motion.ul
+                className="space-y-1"
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={{
+                  hidden: {},
+                  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+                }}
+              >
+                {navLinks.map((link) => (
+                  <motion.li
+                    key={link.href}
+                    variants={{
+                      hidden: { opacity: 0, x: -30 },
+                      visible: { opacity: 1, x: 0 }
+                    }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="border-b border-foreground-light/10"
                   >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-              <li className="pt-4">
-                <Link
-                  href="#contact"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="btn-lime inline-flex items-center gap-2"
-                >
-                  Contact
-                  <ArrowUpRight size={16} />
-                </Link>
-              </li>
-            </ul>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="group flex items-baseline justify-between py-4"
+                    >
+                      <span className="text-4xl md:text-5xl font-bold text-foreground-light group-hover:text-accent transition-colors duration-300">
+                        {link.label}
+                      </span>
+                      <span className="text-sm text-foreground-light/40 font-mono">
+                        {link.numeral}
+                      </span>
+                    </Link>
+                  </motion.li>
+                ))}
+              </motion.ul>
+
+              {/* Footer info */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="absolute bottom-8 left-6 right-6"
+              >
+                <div className="flex justify-between items-end text-xs text-foreground-light/40">
+                  <span>© 2025 Api Al Rahman</span>
+                  <span className="font-mono">Software Engineer</span>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
+
+

@@ -90,15 +90,59 @@ export function ContextAwareCursor() {
   const imageRef = useRef<HTMLDivElement>(null);
   const position = useRef({ x: 0, y: 0 });
   const targetPosition = useRef({ x: 0, y: 0 });
+  const [isAutoHovering, setIsAutoHovering] = useState(false);
+
+  // Check if element is clickable
+  const isClickable = useCallback((element: HTMLElement | null): boolean => {
+    if (!element) return false;
+    
+    const clickableSelectors = [
+      'a', 'button', 'input', 'textarea', 'select',
+      '[role="button"]', '[data-clickable]'
+    ];
+    
+    const clickableClasses = [
+      'cursor-pointer', 'btn-lime', 'btn-lime-circle', 
+      'social-icon', 'project-card', 'nav-link'
+    ];
+
+    // Check if element matches any clickable selector
+    if (clickableSelectors.some(sel => element.matches(sel))) return true;
+    
+    // Check if element has any clickable class
+    if (clickableClasses.some(cls => element.classList.contains(cls))) return true;
+    
+    // Check if element is SVG or inside SVG with clickable parent
+    if (element.tagName === 'SVG' || element.tagName === 'svg' || element.closest('svg')) {
+      const parent = element.closest('a, button, [role="button"]');
+      if (parent) return true;
+    }
+
+    // Check parent up to 5 levels
+    let parent = element.parentElement;
+    let depth = 0;
+    while (parent && depth < 5) {
+      if (clickableSelectors.some(sel => parent!.matches(sel))) return true;
+      if (clickableClasses.some(cls => parent!.classList.contains(cls))) return true;
+      parent = parent.parentElement;
+      depth++;
+    }
+
+    return false;
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       targetPosition.current = { x: e.clientX, y: e.clientY };
+      
+      // Auto-detect clickable elements
+      const target = e.target as HTMLElement;
+      setIsAutoHovering(isClickable(target));
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [isClickable]);
 
   useEffect(() => {
     let animationId: number;
@@ -123,8 +167,9 @@ export function ContextAwareCursor() {
     return () => cancelAnimationFrame(animationId);
   }, []);
 
-  // Cursor size based on state
+  // Cursor size based on state - now includes auto-hover
   const getCursorSize = () => {
+    // Context-based states take priority
     switch (cursorState.hoverType) {
       case "link":
         return 60;
@@ -135,7 +180,10 @@ export function ContextAwareCursor() {
       case "text":
         return 4;
       default:
-        return cursorState.isHovering ? 40 : 12;
+        // Auto-detect fallback
+        if (cursorState.isHovering) return 40;
+        if (isAutoHovering) return 40;
+        return 12;
     }
   };
 
