@@ -15,6 +15,21 @@
   --card-hover: #ebebeb;
 }
 
+/* Dark theme */
+.dark {
+  --background: #0a0a0a;
+  --background-dark: #000000;
+  --foreground: #ffffff;
+  --foreground-light: #e5e5e5;
+  --muted: #262626;
+  --muted-foreground: #a3a3a3;
+  --accent: #3B82F6;
+  --accent-hover: #60a5fa;
+  --border: #262626;
+  --card: #171717;
+  --card-hover: #1f1f1f;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-background-dark: var(--background-dark);
@@ -43,6 +58,12 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Smooth theme transitions for all elements */
+*, *::before, *::after {
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.3s ease;
 }
 
 /* Selection with lime */
@@ -160,6 +181,28 @@ body {
 
 .section-dark .text-muted-foreground {
   color: #a3a3a3;
+}
+
+/* Invert section-dark in dark mode */
+.dark .section-dark {
+  background: var(--foreground-light);
+  color: var(--background);
+}
+
+.dark .section-dark .text-muted-foreground {
+  color: #525252;
+}
+
+.dark .section-dark .text-foreground-light {
+  color: #000000;
+}
+
+.dark .section-dark .text-accent {
+  color: var(--accent);
+}
+
+.dark .section-dark .bg-accent\/10 {
+  background: rgba(59, 130, 246, 0.1);
 }
 
 /* ===== PROJECT CARD HOVER (Lime text overlay) ===== */
